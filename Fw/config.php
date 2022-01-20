@@ -1,4 +1,4 @@
 <?php
 
-$config =[ "db" => ["login" => 'testlog', "psw" => "testspw"], "login" => "lol"
+$config =[ "db" => ["login" => 'testlog', "psw" => "testspw"]
     ];
