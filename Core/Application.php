@@ -8,7 +8,11 @@ class Application{
     private static $instance = null;
     private $template = null;
 
-    private function __construct() {
+    protected function __construct(){  //предотвращаем создание объекта через оператор new
+    }
+    protected function __clone(){ //защита от клонирования
+    }
+    protected function __wakeup(){ // защита от восстановления из строки
     }
 
     public static function getInstance(): Application { 

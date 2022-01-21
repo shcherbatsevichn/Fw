@@ -17,3 +17,5 @@ function autoload($class){ //функция автозагрузки
 spl_autoload_register("autoload"); //автозагрузчик
 
 
+echo(Config::get("db/login")."<br>"); 
+echo(Config::get("db/psw")."<br>"); 

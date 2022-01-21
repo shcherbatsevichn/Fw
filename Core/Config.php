@@ -2,37 +2,24 @@
 namespace Fw\Core;
 
 class Config{
+    private static $allconfigs = null; 
+    
+    private static function init(){ // загрузка данных файла config.php 
+        require_once $_SERVER['DOCUMENT_ROOT']."/Fw/config.php"; //открываем документ config
+        self::$allconfigs = $config; 
+    }
 
     public static function get($path){ 
+        if(self::$allconfigs === null){
+            self::init();
+        }
+        $config = self::$allconfigs; //записываем в переменную, чтобы можно было дальше измнять информацию без потери данных
         $patharray = explode("/", $path); //разбиваем строку на массив 
-        require_once $_SERVER['DOCUMENT_ROOT']."/Fw/config.php"; //открываем документ config
-        foreach($patharray as $kayv){      
-            $errorflag = 1;     //комментарии к этому флагу внизу
-            foreach($config as $kay => $value){
-                if($kayv == $kay){  //ищем совподения ключей
-                    if(is_array($config[$kay])){
-                        $config = $config[$kay]; 
-                        $errorflag = 0; 
-                    }else{
-                        $config = $config[$kay];
-                        $errorflag = 0;
-                    }
-                }
-            }
+        foreach($patharray as $kay){ 
+           if(isset($config[$kay])){
+            $config = $config[$kay];
+           }
         }
-        if($errorflag  == 1 ){
-            return false;
-        }
-        if(!$config){
-            return false;
-        }else{
-            return $config;
-        }
+        return $config;
     }
 }
-
-
-
-//флаг errorflag служит для защиты от неверно введенного пути. 
-//Если $config = ["db" => ["login" =>... ], "login" => ...], то при использовании пути "dd/login"
-//нам выдаст ошибку, вместо значения login ($config["login"]);
