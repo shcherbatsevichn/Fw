@@ -1,2 +1,2 @@
 <?php 
-namespace Fw\Core;
+namespace Core;

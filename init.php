@@ -1,12 +1,14 @@
 <?php
 session_start();
 
-use Fw\Core\Application; 
-use Fw\Core\Config;
-use Fw\Core\Route;
+define ("CORE_INIT", "true"); 
 
-function autoload($class){ //функция автозагрузки
-    $root = $_SERVER['DOCUMENT_ROOT'];
+use Core\Application as Application; 
+use Core\Config as Config;
+use Core\Route as Route;
+
+function autoload($class){              //функция автозагрузки
+    $root =  __DIR__;
     $class = str_replace("\\", '/', $class);
     $file = $root."/{$class}.php";
     if(file_exists($file)){
@@ -16,6 +18,4 @@ function autoload($class){ //функция автозагрузки
 
 spl_autoload_register("autoload"); //автозагрузчик
 
-
-echo(Config::get("db/login")."<br>"); 
-echo(Config::get("db/psw")."<br>"); 
+$app = Application::getInstance(); //Инициализирован объект  Application
