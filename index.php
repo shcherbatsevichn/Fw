@@ -1,15 +1,19 @@
 <?php
+
 require_once "init.php";
 if(!defined(CORE_INIT)) {
     die();
 }
-$app->pager->setProperty("ftrtext", "The project is under development. Pleas, sten by ");
+
+$app->pager->setProperty("footertrtext", "The project is under development. Pleas, sten by ");
 $app->pager->setProperty("headtext", "This is index page of my test framework");
 $app->pager->setProperty("keywords", "Framework, PHP, HTML");
+$app->pager->setProperty("title", "Fw progress");
 $app->header();
+
 ?>
 <pre>
--------- 24.01.2021 --------
+-------- 24.01.2021 -------- 
 
 1. Создана структура шаболнов сайта;
 2. Создан файл index.php;
@@ -41,10 +45,26 @@ restartBuffer.(описан минимальный функционал);
 сделано это для упрощения алгоритма поиска изамены. 
 12. Пофикшен баг,  выводящий лишний символ при подключени heaer
 13. Описана фукнкция Page->getAllReplace;
-14. Описана фукнкция Page->showHead;
+14. Описана фукнкция Page->showHead.
 
 -------- 26.01.2021 --------
+
+1. Отправлен на проверку;
+2. Исправлено пространство имен на Fw\Core...;
+3. Исключены прямые подключения файлов в классах. Работа только за счёт функции автозагрузки. 
+4. Исправлена функция Application::restartBuffer;
+5. Исправлена логика работы header и footer;
+6. Исправлено подключение файлов шаблона; 
+7. Инициализирован экзмпляр класса Config в Application, для подключения шаблона. 
+
 -------- 27.01.2021 --------
+1. Исправлена логика работы всех функций в кассе Page; 
+2. Реализовано подключение макросов в шаблон сайта; 
+3. Иправлен нейминг переменных;
+4. Исправлена логика работы функции showHead;
+5. Исправлена логика хранения ссылок на js и css (ключи в массиве);
+6. Проведен тест работоспособности.
+
 -------- 28.01.2021 --------
 </pre>
 

@@ -1,4 +1,4 @@
 <?php
 
-$config =[ "templates" => "default_template"
+$config =[ "templates" => "defoult_template"
     ];

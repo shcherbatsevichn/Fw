@@ -1,11 +1,11 @@
 <?php 
-namespace Core;
+namespace Fw\Core;
 
 class Config{
     private static $allconfigs = null; 
     
     private static function init(){ // загрузка данных файла config.php 
-        require_once $_SERVER['DOCUMENT_ROOT']."config.php"; //открываем документ config
+        require_once $_SERVER['DOCUMENT_ROOT']."/Fw/config.php"; //открываем документ config
         self::$allconfigs = $config; 
     }
 

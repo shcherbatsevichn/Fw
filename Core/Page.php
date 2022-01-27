@@ -1,48 +1,51 @@
 <?php
-namespace Core;
-
-require_once __DIR__."/Traits/Singleton.php";
+namespace FW\Core;
 
 class Page{
 
-    private $propsarray = []; //массив для хранения
-    private $jslinksarray = [];
-    private $csslinksarray = [];
+    public $propsarray = []; //массив для хранения
+    public $jslinksarray = [];
+    public $csslinksarray = [];
 
-    use Traits\Singleton; 
+    use Traits\Singleton;  
 
     public function addJs(string $src){  //добавляет src в массив,сохряняя уникальность
-        $splitsrcarray = explode('/', $src); // разделяем строку по слешу
-        $jsname = '#FW_JS_LINK_'.$splitsrcarray[count($splitsrcarray)-3]."_".$splitsrcarray[count($splitsrcarray)-1]; // за ключ (id) берем название шаблона и имя файла (последняя строка)
+        $jsname = '#FW_JS_LINK_'.md5($src); // за ключ (id) берем хеш str
         $this->jslinksarray[$jsname] = $src;  //записываемв массив
-        return  $this->jslinksarray;
     }
     public function addCss(string $link){ // Добавляет link в массив, сохряняя уникальность
-        $splitsrcarray = explode('/', $link);
-        $cssname = "#FW_CSS_LINK_".$splitsrcarray[count($splitsrcarray)-3]."_".$splitsrcarray[count($splitsrcarray)-1];
+        $cssname = "#FW_CSS_LINK_".md5($link);
         $this->csslinksarray[$cssname] = $link;
-        return  $this->csslinksarray;
     }
     public function addString(string $str){ //Добавляет в массив для хранения 
-        $this->propsarray["#FW_PAGE_PROPERTY_byaddString"] = $str;
-        return $this->propsarray;
+        $this->propsarray["#FW_PAGE_PROPERTY_anytag#"] = $str;
     }
     public function setProperty(string $id, $value){ // добавляет для хранения значения по ключу
-        $this->propsarray["#FW_PAGE_PROPERTY_".$id] = $value;
-        return $this->propsarray;
+        $this->propsarray["#FW_PAGE_PROPERTY_".$id."#"] = $value;
     }
     public function getProperty(string $id){  //Получение по ключу
-        return $this->propsarray[$id];
+        return $this->propsarray["#FW_PAGE_PROPERTY_".$id."#"];
     }
     public function showProperty(string $id){   // Выводит макрос для будующей замены #FW_PAGE_PROPERY_{$id}#
-        if(isset($this->propsarray["#FW_PAGE_PROPERTY_".$id])){ 
-            return $this->propsarray["#FW_PAGE_PROPERTY_".$id];
+        if(isset($this->propsarray["#FW_PAGE_PROPERTY_".$id."#"])){ 
+            echo ("#FW_PAGE_PROPERTY_".$id."#");
         }
     }
     public function getAllReplace(){   // Получаем массив макросов для будующей замены
-        return $this->propsarray + $this->jslinksarray + $this->csslinksarray;
+        return array_keys($this->propsarray) + array_keys($this->jslinksarray) + array_keys($this->csslinksarray);
     }
     public function showHead(){   // выводит 3 макроса замены  js, css, str
-        return $this->jslinksarray + $this->csslinksarray + $this->propsarray["#FW_PAGE_PROPERTY_byaddString"];
+        foreach($this->jslinksarray as $key => $value){
+            echo "<script src =".$key."></script>\n";
+        }
+        foreach($this->csslinksarray as $key => $value){
+            echo "<script src =".$key."></script>\n";
+        }
+        foreach($this->jslinksarray as $key => $value){
+            echo "<link rel=\"stylesheet\" href =".$key.">\n";
+        }
+        if(isset($this->propsarray["#FW_PAGE_PROPERTY_anytag"])){
+            echo "#FW_PAGE_PROPERTY_anytag\n";
+        }
     }
 }

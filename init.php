@@ -3,12 +3,13 @@ session_start();
 
 define ("CORE_INIT", "true"); 
 
-use Core\Application as Application; 
-use Core\Config as Config;
-use Core\Route as Route;
+use Fw\Core\Application as Application; 
+use Fw\Core\Config as Config;
+use Fw\Core\Route as Route;
+use Fw\Core\Page as Page;
 
-function autoload($class){              //функция автозагрузки
-    $root =  __DIR__;
+function autoload($class){ //функция автозагрузки
+    $root = $_SERVER['DOCUMENT_ROOT'];
     $class = str_replace("\\", '/', $class);
     $file = $root."/{$class}.php";
     if(file_exists($file)){
