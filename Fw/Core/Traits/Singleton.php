@@ -1,12 +1,8 @@
-<?php 
-namespace Fw\Core;
+<?php
+namespace Fw\Core\Traits;
 
-class Application{
-
-    private $__components = [];
-    private $pager = null; 
+trait Singleton{
     private static $instance = null;
-    private $template = null;
 
     private function __construct(){  //предотвращаем создание объекта через оператор new
     }
@@ -15,11 +11,10 @@ class Application{
     private function __wakeup(){ // защита от восстановления из строки
     }
 
-    public static function getInstance(): Application { 
+    public static function getInstance() { 
         if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
-    
 }
