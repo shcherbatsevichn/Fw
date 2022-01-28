@@ -7,9 +7,12 @@ class Page{
     private $jslinksarray = []; //контейнер для ссылок js
     private $anystring = []; // контейнер для str
     private $csslinksarray = []; // контейнер для ссылок css 
-    private $prefix = "#FW_PAGE_"; // приставка всех макросов 
 
-    use Traits\Singleton;  
+    use Traits\Singleton; 
+    
+    private function getMacro($id){ // Функция для создания макросов 
+        return ("#FW_REPLACE_{$id}_MAKRO#");
+    }
 
     public function addJs(string $src){  //добавляет src в массив,сохряняя уникальность
         $jsname = md5($src); //имя ссылки в контейнере 
@@ -24,43 +27,41 @@ class Page{
         $this->anystring[$strname] = $str;
     }
     public function setProperty(string $id, $value){ // добавляет для хранения значения по ключу
-        $this->propsarray[$this->prefix."PROPERTY_".$id."#"] = $value;
+        $this->propsarray[$this->getMacro("PROPERTY_".$id)] = $value;
     }
     public function getProperty(string $id){  //Получение по ключу
-        return $this->propsarray[$this->prefix."PROPERTY_".$id."#"];
+        return $this->propsarray[$this->getMacro("PROPERTY_".$id)];
     }
     public function showProperty(string $id){   // Выводит макрос для будующей замены #FW_PAGE_PROPERY_{$id}#
-        if(isset($this->propsarray[$this->prefix."PROPERTY_".$id."#"])){ 
-            echo ($this->prefix."PROPERTY_".$id."#");
-        }
+            echo ($this->getMacro("PROPERTY_".$id));
     }
     private function getJsTag(){ //собираем ссылки js из контейнера, для последующей замены
         $resultstring = "";
         foreach($this->jslinksarray as $key => $value){ //проходимся по всем ссылкам
             $resultstring .= "<script src=\"$value\"></script>\n";
         }
-        return array($this->prefix."JS#" => $resultstring);
+        return array($this->getMacro("JS") => $resultstring);
     }
     private function getCssTag(){ //собираем ссылки css из контейнера, для последующей замены
         $resultstring = "";
         foreach($this->csslinksarray as $key => $value){
             $resultstring .="<link href=\"$value\" rel=\"stylesheet\">\n";
         }
-        return array($this->prefix."CSS#" => $resultstring);
+        return array($this->getMacro("CSS") => $resultstring);
     }
     private function getStringTag(){ //собираем строки из контейнера, для последующей замены
         $resultstring = "";
         foreach($this->anystring as $key => $value){
             $resultstring .= $value."\n";
         }
-        return array($this->prefix."STR#" => $resultstring);
+        return array($this->getMacro("STR") => $resultstring);
     }
     public function getAllReplace(){   // Получаем массив макросов для будующей замены
         return $this->propsarray + $this->getJsTag() + $this->getCssTag() + $this->getStringTag();
     }
     public function showHead(){   // выводит 3 макроса замены  js, css, str
-        echo ($this->prefix."JS#\n");
-        echo ($this->prefix."CSS#\n");
-        echo ($this->prefix."STR#\n");
+        echo ($this->getMacro("JS")."\n");
+        echo ($this->getMacro("CSS")."\n");
+        echo ($this->getMacro("STR")."\n");
     }
 }

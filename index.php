@@ -8,6 +8,7 @@ require_once "Fw/init.php";
 if(!defined(CORE_INIT)) {
     die();
 }
+$app->header();
 $app->pager->addJs("/my/script.js");
 $app->pager->addJs("/my/script2.js");
 $app->pager->addCss("/mycss/style-sheet.css");
@@ -16,7 +17,6 @@ $app->pager->setProperty("footertrtext", "The project is under development. Plea
 $app->pager->setProperty("headtext", "This is index page of my test framework");
 $app->pager->setProperty("keywords", "Framework, PHP, HTML");
 $app->pager->setProperty("title", "Fw progress");
-$app->header();
 
 ?>
 <pre>
@@ -83,6 +83,8 @@ restartBuffer.(описан минимальный функционал);
 7. Исправлена логика подмены макросов;
 8. Проведены тесты. 
 9. Исправлен баг дублирования css-ссылок на страницу. 
+10. Испавлен баг, при котором все объекты property не отображались на странице. 
+11. Написана функция для генерации имен макросов. 
 
 </pre>
 

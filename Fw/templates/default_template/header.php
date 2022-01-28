@@ -13,5 +13,5 @@ $pagepart = $this->pager;
     <title><?= $pagepart->showProperty("title"); ?></title>
 </head>
 <body>
-    <h1><?= $pagepart->showProperty("headtext"); ?></h1>
+    <h1><?=$pagepart->showProperty("headtext"); ?></h1>
     
