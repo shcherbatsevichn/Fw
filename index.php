@@ -1,10 +1,17 @@
 <?php
 
-require_once "init.php";
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+require_once "Fw/init.php";
 if(!defined(CORE_INIT)) {
     die();
 }
-
+$app->pager->addJs("/my/script.js");
+$app->pager->addJs("/my/script2.js");
+$app->pager->addCss("/mycss/style-sheet.css");
+$app->pager->addCss("/mycss/style-sheet2.css");
 $app->pager->setProperty("footertrtext", "The project is under development. Pleas, sten by ");
 $app->pager->setProperty("headtext", "This is index page of my test framework");
 $app->pager->setProperty("keywords", "Framework, PHP, HTML");
@@ -66,6 +73,17 @@ restartBuffer.(описан минимальный функционал);
 6. Проведен тест работоспособности.
 
 -------- 28.01.2021 --------
+
+1. Исправена функция Page::resartBuffer;
+2. Исправлено расположение файлов в проекте;
+3. Проведение теста работоспособности, подправлены маршруты шаблонов;
+4. Удалено лишнее подключение файлов в шаблонах footer и header;
+5. Исправлена логика вывода макросов js, css, str 
+6. Исправлена логика добавления и хранения js, css, str - элементов;
+7. Исправлена логика подмены макросов;
+8. Проведены тесты. 
+9. Исправлен баг дублирования css-ссылок на страницу. 
+
 </pre>
 
 <?php

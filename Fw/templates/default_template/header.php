@@ -1,9 +1,5 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/Fw/init.php";
-if(!defined(CORE_INIT)) {
-    die();
-}
-$pagepart = Fw\Core\Page::getInstance();
+$pagepart = $this->pager;
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +9,7 @@ $pagepart = Fw\Core\Page::getInstance();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="keywords" content="<?= $pagepart->showProperty("keywords")?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?= $pagepart->showHead();?> 
     <title><?= $pagepart->showProperty("title"); ?></title>
 </head>
 <body>
