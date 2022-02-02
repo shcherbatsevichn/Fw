@@ -7,12 +7,12 @@
     padding: 20px;   
 }
 
-.pclocker{
+.p-clock{
     font-size: 14px;
     font-family:'Roboto Mono';
     font-weight: 700;
 }
-.hclocker{
+.h-clock{
     font-size: 20px;
     font-family:'Roboto Mono' ;
     font-weight: 900;

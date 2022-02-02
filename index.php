@@ -15,7 +15,8 @@ $app->pager->setProperty("keywords", "Framework, PHP, HTML");
 $app->pager->setProperty("title", "Fw progress");
 $app->pager->addCss("/Fw/templates/default_template/css/style.css"); // подключение стилей
 $app->includeComponent("Fw\Components\Clocker:DigitalClock", "default_template", ["input"]); //подключаем компонент 
-$app->includeComponent("Fw\Components\Clocker:DigitalClock", "violet", ["input"]); //подключаем компонент  c други шаблоном
+$app->includeComponent("Fw\Components\Calculator:CalcSumm", "violet", [2, 3]);
+//$app->includeComponent("Fw\Components\Clocker:DigitalClock", "default_template", ["input"]); //подключаем компонент 
 ?>
 <pre>
 -------- 02.02.2021 --------
@@ -33,7 +34,13 @@ $app->includeComponent("Fw\Components\Clocker:DigitalClock", "violet", ["input"]
 11. Тест подключения другого шаблона компанента;
 12. Тест подключения двух одинаковых шаблонов (упала страница);
 13. Реализована возможность подключения нескольких компонентов на одну страницу.
-
+14. Реализована функция динамического создания url в Component\Template
+15. Убраны пути к компонтам из config;
+16. Исправлен алгоритм поика классов в Application::includeComponent();
+17. Тестирование (Проблема с отображением одинаковых шаблонов с одинаковыми стилями (один отображается, второй - нет))
+18. Настроен и подключен компонент с входными и выходынми параметрами. 
+19. Исправлены шаблоны компонентов.
+20. Подключена передача параметров result и param  в Component\Template
 -------- 01.02.2021 --------
 
 1. Описан класс Base

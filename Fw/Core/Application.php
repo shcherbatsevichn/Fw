@@ -64,20 +64,20 @@ class Application{
         $docpath = $namespace."\\".$id."\\class"; // для упрощения внешнего вида собираем в переменную 
         $file = ($_SERVER['DOCUMENT_ROOT']."/".str_replace("\\", "/", $docpath).".php");
         $componentbefore = get_declared_classes(); //получаем список классов до подключения
-        echo "<br>";
         if(file_exists($file)){ 
             include_once ($file);  //если файл существует - подключаем его
         }
         $componentafter = get_declared_classes(); //получаем список классов после подключения
         if(array_diff( $componentafter, $componentbefore) != []){
-            $this->__components = array_diff( $componentafter, $componentbefore); //находим различия
+            $componentdiffarray = array_values(array_diff( $componentafter, $componentbefore));
+            $componentdiff = $componentdiffarray[0];
+            $this->__components[$id] = $componentdiff; //находим различия
         }
-        foreach($this->__components as $name){
-            if(stripos($name, $id)){  //находим класс, который содержит id компонента 
+        foreach($this->__components as $key => $name){
+            if(get_parent_class($name) == 'Fw\Core\Component\Base' && $key == $id){  //находим класс, который содержит id компонента 
                 $classname = $name;
             }
         }
-       
         $component = new $classname($id, $template, $params); //создаем экземпляр этого класса
         $component->executeComponent(); // выполняем компонент 
         $component = 0;

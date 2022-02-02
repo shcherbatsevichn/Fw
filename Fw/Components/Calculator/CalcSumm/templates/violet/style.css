@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
 
-.block-clock-violet{
+.block-calc-violet{
     border: solid;
     border-radius: 10px;
     border-color: rgba(36, 3, 51, 0.637); 
@@ -9,12 +9,12 @@
     
 }
 
-.p-clock-violet{
+.p-calc-violet{
     font-size: 14px;
     font-family:'Roboto Mono';
     font-weight: 700;
 }
-.h-clock-violet{
+.h-calc-violet{
     font-size: 20px;
     font-family:'Roboto Mono' ;
     font-weight: 900;
