@@ -10,18 +10,13 @@ class DigitalClock extends Base{
     public function __construct( $id, $templateid, $params ){
         $this->deltatime = new Calculator;
         $this->__path = __DIR__;
-        $this->params = $params;
+        $this->params += $params;
         parent::__construct($id, $templateid);
     }
 
     public function executeComponent(){  
-       // $pagercomponent = Page::getInstance(); //нет 
-        $this->result[0] =  $this->deltatime->getDifferentTime("18.01.2022");
-        //$pagercomponent->setProperty("result-cloker", $this->result[0]); //
-        $this->template->__component = ["result" => $this->result, "param" => $this->params];
+        $this->result["deltaday"] =  $this->deltatime->getDifferentTime($this->params["date"]);
+        $this->template->__component = ["result" => $this->result, "params" => $this->params];
         $this->template->render();
     }   
-
-    
-    
 }

@@ -11,7 +11,6 @@ use ArrayIterator;
 class Dictionary implements IteratorAggregate, ArrayAccess, Countable {
 
     private $container =[];
-    private $_myCount;
     
     public function getIterator() : Traversable {
         return new ArrayIterator($this);
@@ -38,7 +37,7 @@ class Dictionary implements IteratorAggregate, ArrayAccess, Countable {
     }
 
     public function count(): int{
-        return $this->_myCount;
+        return count($this->container);
     }
 
 }

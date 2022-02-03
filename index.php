@@ -8,17 +8,27 @@ require_once "Fw/init.php";
 if(!defined(CORE_INIT)) {
     die();
 }
+
 $app->header();
 $app->pager->setProperty("footertrtext", "The project is under development. Pleas, sten by ");
 $app->pager->setProperty("headtext", "This is index page of my test framework");
 $app->pager->setProperty("keywords", "Framework, PHP, HTML");
 $app->pager->setProperty("title", "Fw progress");
 $app->pager->addCss("/Fw/templates/default_template/css/style.css"); // подключение стилей
-$app->includeComponent("Fw\Components\Clocker:DigitalClock", "default_template", ["input"]); //подключаем компонент 
-$app->includeComponent("Fw\Components\Calculator:CalcSumm", "violet", [2, 3]);
-//$app->includeComponent("Fw\Components\Clocker:DigitalClock", "default_template", ["input"]); //подключаем компонент 
+$app->includeComponent("Fw\Components\Clocker:DigitalClock", "default_template", ["date" => "18.01.2022"]); //подключаем компонент отсчёта дней с начала разработки Fw
+$app->includeComponent("Fw\Components\Calculator:CalcSumm", "violet", ["a" => 2, "b" => 3]);// тестовый компонент калькулятор 
 ?>
 <pre>
+-------- 03.02.2021 --------
+
+1. Исправлен баг (Проблема с отображением одинаковых шаблонов с одинаковыми стилями (один отображается, второй - нет));
+2. Исправлена функция Template::render (реализован параметр $page);
+3. Классы Request и Server заполнены соответстующими супер-глобальными переменными;
+4. Тестирование;
+5. Удаление отладочной информации;
+6. Комментирование кода;
+7. Убраны "магические" цифры из массивов с данными result и param компонентов.
+
 -------- 02.02.2021 --------
 
 1. Настройка и отладка подключения шаблона;
@@ -41,6 +51,7 @@ $app->includeComponent("Fw\Components\Calculator:CalcSumm", "violet", [2, 3]);
 18. Настроен и подключен компонент с входными и выходынми параметрами. 
 19. Исправлены шаблоны компонентов.
 20. Подключена передача параметров result и param  в Component\Template
+
 -------- 01.02.2021 --------
 
 1. Описан класс Base

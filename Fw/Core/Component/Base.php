@@ -16,6 +16,6 @@ abstract class Base {
 
     public function __construct($id, $templateid){  // заполнение свойств. Объявление шаблона
         $this->id = $id;
-        $this->template = new Template($id, $templateid, $this->__path);
+        $this->template = new Template($templateid, $this->__path);
     } 
 }

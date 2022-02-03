@@ -68,13 +68,13 @@ class Application{
             include_once ($file);  //если файл существует - подключаем его
         }
         $componentafter = get_declared_classes(); //получаем список классов после подключения
-        if(array_diff( $componentafter, $componentbefore) != []){
+        if(array_diff( $componentafter, $componentbefore) != []){ //записываем в список подключаемых классов только класс компонента (без Base) это необходимо для того, чтобы мы смогли свободно обращаться к имени класса по id(не важно какое имя у класса)
             $componentdiffarray = array_values(array_diff( $componentafter, $componentbefore));
             $componentdiff = $componentdiffarray[0];
-            $this->__components[$id] = $componentdiff; //находим различия
+            $this->__components[$id] = $componentdiff; 
         }
         foreach($this->__components as $key => $name){
-            if(get_parent_class($name) == 'Fw\Core\Component\Base' && $key == $id){  //находим класс, который содержит id компонента 
+            if(get_parent_class($name) == 'Fw\Core\Component\Base' && $key == $id){  // Ищем именно подключаемый класс в __components и проверяем, является ли у него родитель Base
                 $classname = $name;
             }
         }

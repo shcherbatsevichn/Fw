@@ -13,10 +13,8 @@ class CalcAdd extends Base{
         parent::__construct($id, $templateid);
     }
 
-    public function executeComponent(){  
-       // $pagercomponent = Page::getInstance(); //нет 
-        $this->result[0] =  $this->deltatime->getSumm($this->params[0], $this->params[1]);
-        //$pagercomponent->setProperty("result-cloker", $this->result[0]); //
+    public function executeComponent(){   
+        $this->result["summ"] =  $this->deltatime->getSumm($this->params["a"], $this->params["b"]);
         $this->template->__component = ["result" => $this->result, "param" => $this->params];
         $this->template->render();
     }   
