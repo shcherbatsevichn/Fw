@@ -61,26 +61,25 @@ class Application{
         $componentinformation = explode(":", $component); // парсим 
         $namespace = $componentinformation[0]; //отделяем неймспейс 
         $id = $componentinformation[1]; //отделяем id
-        $docpath = $namespace."\\".$id."\\class"; // для упрощения внешнего вида собираем в переменную 
-        $file = ($_SERVER['DOCUMENT_ROOT']."/".str_replace("\\", "/", $docpath).".php");
-        $componentbefore = get_declared_classes(); //получаем список классов до подключения
-        if(file_exists($file)){ 
-            include_once ($file);  //если файл существует - подключаем его
-        }
-        $componentafter = get_declared_classes(); //получаем список классов после подключения
-        if(array_diff( $componentafter, $componentbefore) != []){ //записываем в список подключаемых классов только класс компонента (без Base) это необходимо для того, чтобы мы смогли свободно обращаться к имени класса по id(не важно какое имя у класса)
-            $componentdiffarray = array_values(array_diff( $componentafter, $componentbefore));
-            $componentdiff = $componentdiffarray[0];
-            $this->__components[$id] = $componentdiff; 
-        }
-        foreach($this->__components as $key => $name){
-            if(get_parent_class($name) == 'Fw\Core\Component\Base' && $key == $id){  // Ищем именно подключаемый класс в __components и проверяем, является ли у него родитель Base
-                $classname = $name;
+        if(!isset($this->__components[$component])){ //проверяем, есть ли в $__components имя нашего класса
+            $docpath = $namespace."\\".$id."\\class"; // для упрощения внешнего вида собираем в переменную 
+            $file = ($_SERVER['DOCUMENT_ROOT']."/".str_replace("\\", "/", $docpath).".php");
+            $componentbefore = get_declared_classes(); //получаем список классов до подключения
+            if(file_exists($file)){ 
+                include ($file);  //если файл существует - подключаем его
             }
+            $componentafter = get_declared_classes(); //получаем список классов после подключения
+            if(array_diff( $componentafter, $componentbefore) != []){ //записываем в список подключаемых классов только класс компонента (без Base) это необходимо для того, чтобы мы смогли свободно обращаться к имени класса по id(не важно какое имя у класса)
+                $componentdiffarray = array_values(array_diff( $componentafter, $componentbefore));
+                $componentdiff = $componentdiffarray[0];
+                $this->__components[$component] = $componentdiff; 
+            }
+        }
+        if(get_parent_class($this->__components[$component]) == 'Fw\Core\Component\Base'){  // проверяем, является ли он потомком Base
+            $classname = $this->__components[$component];
         }
         $component = new $classname($id, $template, $params); //создаем экземпляр этого класса
         $component->executeComponent(); // выполняем компонент 
-        $component = 0;
     }
          
 }

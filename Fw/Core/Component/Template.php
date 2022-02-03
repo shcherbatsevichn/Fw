@@ -13,9 +13,10 @@ class Template {
     public $id; // строковый id шаблона 
     
 
-    public function __construct( $idtemplate, $pathcomponent){
+    public function __construct( $idtemplate, $componentobj){
+        $this->__component = $componentobj;
         $this->id = $idtemplate;
-        $this->__path = $pathcomponent."/templates/".$idtemplate."/";
+        $this->__path = $this->__component->__path."/templates/".$idtemplate."/";
         $this->__relativePath = $this->getURL();
     }
 
@@ -32,16 +33,21 @@ class Template {
     }
 
     public function render($page = "template"){
+        $params = $this->__component->params;
+        $result = $this->__component->result;
+
         $pagercomponent = Page::getInstance();
 
         if(file_exists($this->__path."result_modifier.php")){
-            require $this->__path."result_modifier.php";
+            include $this->__path."result_modifier.php";
         }
 
-        require $this->__path.$page.".php"; //подключаем нужную страницу
+        if(file_exists($this->__path.$page.".php")){
+            include $this->__path.$page.".php";
+        }
 
         if(file_exists($this->__path."component_epilog.php")){
-            require $this->__path."component_epilog.php";
+            include $this->__path."component_epilog.php";
         }
 
         if(file_exists($this->__path."script.js")){
