@@ -2,7 +2,6 @@
 namespace Fw\Components\Clocker\DigitalClock;
 
 use Fw\Core\Component\Base;
-use Fw\Core\Page as Page;
 
 class DigitalClock extends Base{
     private $deltatime; 
