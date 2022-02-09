@@ -1,5 +1,6 @@
 <?php
 namespace Fw\Core;
+use Exception;
 
 class Application{
 
@@ -67,12 +68,19 @@ class Application{
             $componentbefore = get_declared_classes(); //получаем список классов до подключения
             if(file_exists($file)){ 
                 include ($file);  //если файл существует - подключаем его
+            }else{
+                throw new Exception("Component not detected. Pleas, check valid of namspace and component's name");
+                die;
             }
             $componentafter = get_declared_classes(); //получаем список классов после подключения
             if(array_diff( $componentafter, $componentbefore) != []){ //записываем в список подключаемых классов только класс компонента (без Base) это необходимо для того, чтобы мы смогли свободно обращаться к имени класса по id(не важно какое имя у класса)
                 $componentdiffarray = array_values(array_diff( $componentafter, $componentbefore));
-                $componentdiff = $componentdiffarray[0];
-                $this->__components[$component] = $componentdiff; 
+                foreach($componentdiffarray as $componentdiff){
+                    if(get_parent_class($componentdiff) == 'Fw\Core\Component\Base'){
+                        $this->__components[$component] = $componentdiff;
+                        break;
+                    }
+                }
             }
         }
         if(get_parent_class($this->__components[$component]) == 'Fw\Core\Component\Base'){  // проверяем, является ли он потомком Base
