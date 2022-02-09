@@ -1,4 +1,5 @@
 <?php
 
-$config =[ "templates" => "default_template"
+$config =
+    [ "templates" => "default_template", 
     ];

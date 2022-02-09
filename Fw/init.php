@@ -19,4 +19,4 @@ function autoload($class){ //функция автозагрузки
 
 spl_autoload_register("autoload"); //автозагрузчик
 
-$app = Application::getInstance(); //Инициализирован объект  Application
+$app = Application::getInstance(); //Инициализирован объект Application

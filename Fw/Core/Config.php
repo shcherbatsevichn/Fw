@@ -15,9 +15,9 @@ class Config{
         }
         $config = self::$allconfigs; //записываем в переменную, чтобы можно было дальше измнять информацию без потери данных
         $patharray = explode("/", $path); //разбиваем строку на массив 
-        foreach($patharray as $kay){ 
-           if(isset($config[$kay])){
-            $config = $config[$kay];
+        foreach($patharray as $key){ 
+           if(isset($config[$key])){
+            $config = $config[$key];
            }
         }
         return $config;

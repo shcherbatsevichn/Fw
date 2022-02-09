@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+
+.block-clock{
+    border: solid;
+    border-radius: 10px;
+    border-color: rgba(0, 0, 0, 0.514); 
+    padding: 20px;   
+}
+
+.p-clock{
+    font-size: 14px;
+    font-family:'Roboto Mono';
+    font-weight: 700;
+}
+.h-clock{
+    font-size: 20px;
+    font-family:'Roboto Mono' ;
+    font-weight: 900;
+}
