@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
-
 .block-clock-violet{
     border: solid;
     border-radius: 10px;
@@ -11,11 +9,9 @@
 
 .p-clock-violet{
     font-size: 14px;
-    font-family:'Roboto Mono';
     font-weight: 700;
 }
 .h-clock-violet{
     font-size: 20px;
-    font-family:'Roboto Mono' ;
     font-weight: 900;
 }

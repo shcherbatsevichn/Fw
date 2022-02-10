@@ -1,0 +1,2 @@
+<lable for ="<?= $params['name']?>"><?= $params['title']?></lable>
+<input  type="text" class="form-control <?= $params['additional_class']?>" name="<?= $params['name']?>" id = "<?= $params['attr']['data-id']?>" placeholder="<?= $params['default']?>" >
