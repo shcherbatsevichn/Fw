@@ -1,6 +1,6 @@
 <?php
 $opendiv = "<div class=\"form-check\">\n";   
-echo ("<p>".$params["title"]."</p>");
+echo ("<lable for =\"".$params["name"]."\">".$params["title"]."</lable>");
 foreach($params['list'] as $value){
     echo($opendiv);
     echo("<input type=\"radio\" class=\"form-check-input ".$value["additional_class"]."\" name=\"".$params["name"]."\" id = \"".$value['attr']['data-id']."\">\n");

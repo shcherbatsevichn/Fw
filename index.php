@@ -9,22 +9,26 @@ if(!defined(CORE_INIT)) {
     die();
 }
 
-$fomparams = ["additional_class"=>"window--full-form", "attr"=>["data-form-id" => "form-123"],"method"=> "post", "action"=> "",
+$fomparams = ["additional_class"=>"window--full-form", "attr"=>["data-form-id" => "form-123", "data-btn-id" => "btn-123", "data-btn-title" => "Отправить"],"method"=> "post", "action"=> "",
     "elements"=>[
+        ["content" => "This is the test for." ,"type" => "textarea"],
         ["title" => "My Input" ,"type" => "text", "name" => "my-inp", "default" => "enter something", "attr" => ['data-id' => 17], "additional_class" => 'js-login'],
+        ["title" => "My Inputmult" ,"type" => "text-multiple","name" => "my-inp", "list" => [
+            ["default" => "enter something", "attr" => ['data-id' => 17], "additional_class" => 'js-login']
+            ]
+        ],
         ["title" => "My psw" ,"type" => "password", "name" => "my-psw", "default" => "enter password", "attr" => ['data-id' => 18], "additional_class" => 'js-psw'],
         ["title" => "My number" ,"type" => "number", "name" => "my-number", "default" => "enter number", "attr" => ['data-id' => 22], "additional_class" => 'js-num'],
         ["title" => "Выбери меня" ,"type" => "checkbox", "name" => "my-chb", "attr" => ['data-id' => 19], "additional_class" => 'js-chb'],
         ["title" => "И меня выбери тоже" ,"type" => "checkbox", "name" => "my-chb2", "attr" => ['data-id' => 20], "additional_class" => 'js-chb2'],
-        ["content" => "This is test text." ,"type" => "textarea"],
         ["title" => "Выберите сервер" ,"type" => "select", "name" => "my-sel", "attr" => ['data-id' => 21], "additional_class" => 'js-sel', "list" => [
             ["title" => "Онлайнер", "value" => "onliner", "additional_class" => 'onliner', "attr" => ['data-id' => 211], "selected" => true],
             ["title" => "ТутБай", "value" => "tutby", "additional_class" => 'tutby', "attr" => ['data-id' => 212]]
             ]
         ],
         ["title" => "Выберите утверждение" , "type" => "radio", "name"=>"testradio", "list" => [
-            ["title" => "Онлайнер", "additional_class" => 'onliner', "attr" => ['data-id' => 211]],
-            ["title" => "ТутБай", "additional_class" => 'tutby', "attr" => ['data-id' => 212]]
+            ["title" => "Case 1", "additional_class" => 'onliner', "attr" => ['data-id' => 211]],
+            ["title" => "Case 2", "additional_class" => 'tutby', "attr" => ['data-id' => 212]]
             ]
         ]
     ]
@@ -40,25 +44,50 @@ $app->pager->addCss("/Fw/templates/default_template/css/style.css");// подк�
 try{
     echo "<div class=\"container\"><div class=\"row\"><div class=\"col\">";
     $app->includeComponent("Fw\Components\Clocker:DigitalClock", "default_template", ["date" => "18.01.2022"]); //подключаем компонент отсчёта дней с начала разработки Fw
-    echo "</div><div class=\"col\">";
+    echo "</div> <div class=\"col\">";
     $app->includeComponent("Fw\Components\Calculator:CalcSumm", "violet", ["a" => 2, "b" => 3]);// тестовый компонент калькулятор 
-    echo "</div></div>";
+    echo "</div> </div> </div>";
 }
 catch (Exception $e){
     echo "<div class=\"error\">", $e->getMessage(), "</div>", "\n";
 }
-$app->includeComponent("Fw\Components\Forms:Render", "default", $fomparams);
 ?>
 <div class="container">
     <div class="row">
-        <div class="col text-center">
+        <div class="col">
+            <h3 class="text-center">Пример тестовой формы</h3>
+        </div>
+        <div class="col">
+            <?=$app->includeComponent("Fw\Components\Forms:Render", "default", $fomparams);
+            ?>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+                <h3>11.02.2021</h3>
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item">Тесты</li>
+                    <li class="list-group-item">Исправлена ошибка рендера формы, не подгружался шаблон</li>
+                    <li class="list-group-item">Изменена логика работы компонента рендера формы, подключение компонентов через Application</li>
+                    <li class="list-group-item">Тест нагрузки</li>
+                    <li class="list-group-item">Правка багов</li>
+                </ol>
+        </div>
+        <div class="col">
                 <h3>10.02.2021</h3>
                 <ol class="list-group list-group-numbered">
                     <li class="list-group-item">Подключен Bootstrap</li>
                     <li class="list-group-item">Создана верстка главной страницы Fw</li>
                     <li class="list-group-item">Реализован компонент текстового инпута</li>
                     <li class="list-group-item">Реализован компонент рендера формы</li>
-                    <li class="list-group-item">Реализован компонент инпута с паролем</li>
+                    <li class="list-group-item">Реализован компонент инпута с select</li>
+                    <li class="list-group-item">Реализован компонент инпута с radio</li>
+                    <li class="list-group-item">Реализован компонент инпута с number</li>
+                    <li class="list-group-item">Реализован компонент инпута с checkbox</li>
+                    <li class="list-group-item">Реализован компонент инпута с textarea</li>
                 </ol>
         </div>
     </div>
