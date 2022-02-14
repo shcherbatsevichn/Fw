@@ -3,9 +3,9 @@
 use Fw\Core\Application;
 use Fw\Core\Component\Base;
 
-class InputTextMultiple extends Base{
+class InputCheckboxMultiple extends Base{
 
-    private $config = "Fw\Components\Forms:Input-text";
+    private $config = "Fw\Components\Forms:Input-checkbox";
     private $app;
 
     public function __construct($id, $templateid, $params)
@@ -18,8 +18,11 @@ class InputTextMultiple extends Base{
     public function executeComponent()
     {
         ob_start();
-        $this->params['name'] .= "[0]"; // преобразовываем имя инпута. При создании новых инпутов оно будет преобразовано автоматически
-        $this->app->includeComponent($this->config,$this->template->id, $this->params); 
+        foreach($this->params["list"] as $key => $value){
+            $this->params['name'] .= "[$key]";
+            $value['name'] = $this->params['name'];
+            $this->app->includeComponent($this->config,$this->template->id, $value);
+        }
         $this->result["renderedtext"] = ob_get_contents();
         ob_clean();
         $this->template->render();

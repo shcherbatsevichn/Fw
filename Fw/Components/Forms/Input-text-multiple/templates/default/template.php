@@ -1,2 +1,4 @@
-<lable for ="<?= $params['name']?>"><?= $params['title']?></lable>
-<input  type="text" class="form-control <?= $params['additional_class']?>" name="<?= $params['name']?>" id = "<?= $params['attr']['data-id']?>" placeholder="<?= $params['default']?>" >
+<div>
+    <?= $result["renderedtext"]; ?> 
+    <input type="button" class="btn btn-outline-success" onclick="return addInput(this)" value="+">
+</div>

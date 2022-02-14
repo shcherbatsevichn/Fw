@@ -9,21 +9,29 @@ if(!defined(CORE_INIT)) {
     die();
 }
 
+//--переменная с параметрами рендера формы
 $fomparams = ["additional_class"=>"window--full-form", "attr"=>["data-form-id" => "form-123", "data-btn-id" => "btn-123", "data-btn-title" => "Отправить"],"method"=> "post", "action"=> "",
     "elements"=>[
         ["content" => "This is the test for." ,"type" => "textarea"],
         ["title" => "My Input" ,"type" => "text", "name" => "my-inp", "default" => "enter something", "attr" => ['data-id' => 17], "additional_class" => 'js-login'],
-        ["title" => "My Inputmult" ,"type" => "text-multiple","name" => "my-inp", "list" => [
-            ["default" => "enter something", "attr" => ['data-id' => 17], "additional_class" => 'js-login']
-            ]
-        ],
+        ["type" => "text-multiple", "name" => "my-inp", "title" => "My Inputmult", "default" => "enter something", "attr" => ['data-id' => 120], "additional_class" => 'js-login'],
         ["title" => "My psw" ,"type" => "password", "name" => "my-psw", "default" => "enter password", "attr" => ['data-id' => 18], "additional_class" => 'js-psw'],
         ["title" => "My number" ,"type" => "number", "name" => "my-number", "default" => "enter number", "attr" => ['data-id' => 22], "additional_class" => 'js-num'],
         ["title" => "Выбери меня" ,"type" => "checkbox", "name" => "my-chb", "attr" => ['data-id' => 19], "additional_class" => 'js-chb'],
         ["title" => "И меня выбери тоже" ,"type" => "checkbox", "name" => "my-chb2", "attr" => ['data-id' => 20], "additional_class" => 'js-chb2'],
+        ["title" => "testcheckb-multiply" ,"type" => "checkbox-multiple", "name" => "my-chb-mult", "list" => [
+         ["title" => "Пункт 1", "attr" => ['data-id' => 1919], "additional_class" => 'js-chb'],
+         ["title" => "Пункт 2", "attr" => ['data-id' => 1920], "additional_class" => 'js-chb'],
+         ["title" => "Пункт 3", "attr" => ['data-id' => 1921], "additional_class" => 'js-chb']  
+        ] ],
         ["title" => "Выберите сервер" ,"type" => "select", "name" => "my-sel", "attr" => ['data-id' => 21], "additional_class" => 'js-sel', "list" => [
             ["title" => "Онлайнер", "value" => "onliner", "additional_class" => 'onliner', "attr" => ['data-id' => 211], "selected" => true],
             ["title" => "ТутБай", "value" => "tutby", "additional_class" => 'tutby', "attr" => ['data-id' => 212]]
+            ]
+        ],
+        ["title" => "Выберите сервер Multiple" ,"type" => "select-multiple", "name" => "my-sel-mult", "attr" => ['data-id' => 2121], "additional_class" => 'js-sel', "list" => [
+            ["title" => "Онлайнер", "value" => "onliner", "additional_class" => 'onliner', "attr" => ['data-id' => 21211], "selected" => true],
+            ["title" => "ТутБай", "value" => "tutby", "additional_class" => 'tutby', "attr" => ['data-id' => 21212]]
             ]
         ],
         ["title" => "Выберите утверждение" , "type" => "radio", "name"=>"testradio", "list" => [
@@ -39,7 +47,7 @@ $app->pager->setProperty("footertrtext", "The project is under development. Plea
 $app->pager->setProperty("headtext", "Framework by Nikita Shcherbatsevich");
 $app->pager->setProperty("keywords", "Framework, PHP, HTML");
 $app->pager->setProperty("title", "Fw progress");
-$app->pager->addCss("/Fw/libs/bootstrap-5.1.3-dist/css/bootstrap.css");// подключение стилей
+$app->pager->addCss("/Fw/libs/bootstrap-5.1.3-dist/css/bootstrap.css");// подключение стилей bootstrap
 $app->pager->addCss("/Fw/templates/default_template/css/style.css");// подключение стилей
 try{
     echo "<div class=\"container\"><div class=\"row\"><div class=\"col\">";
@@ -58,13 +66,31 @@ catch (Exception $e){
             <h3 class="text-center">Пример тестовой формы</h3>
         </div>
         <div class="col">
-            <?=$app->includeComponent("Fw\Components\Forms:Render", "default", $fomparams);
+            <?php
+            try{
+                $app->includeComponent("Fw\Components\Forms:Render", "default", $fomparams);
+            }catch (Exception $e){
+                echo "<div class=\"error\">", $e->getMessage(), "</div>", "\n";
+            }
             ?>
         </div>
     </div>
 </div>
 
 <div class="container">
+    <div class="row">
+        <div class="col text-center">
+        <h3>14.02.2021</h3>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Тесты</li>
+                <li class="list-group-item">Написан компонент input multiple и js скрипт к нему</li>
+                <li class="list-group-item">Написан компонент checkbox multiple</li>
+                <li class="list-group-item">Написан компонент select multiple</li>
+                <li class="list-group-item">Тестирование работеспособности</li>
+            </ol>
+        </div>
+        
+    </div>
     <div class="row">
         <div class="col">
                 <h3>11.02.2021</h3>
@@ -74,6 +100,7 @@ catch (Exception $e){
                     <li class="list-group-item">Изменена логика работы компонента рендера формы, подключение компонентов через Application</li>
                     <li class="list-group-item">Тест нагрузки</li>
                     <li class="list-group-item">Правка багов</li>
+                    <li class="list-group-item">Изучение js</li>
                 </ol>
         </div>
         <div class="col">
