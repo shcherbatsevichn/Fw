@@ -11,6 +11,8 @@ class InputSelectMultiple extends Base{
     }
     public function executeComponent()
     {
+        $this->result = $this->getOption();
         $this->template->render();
     }
+    use \Fw\Components\Forms\Traits\Select;
 }

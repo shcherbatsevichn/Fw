@@ -87,6 +87,8 @@ catch (Exception $e){
                 <li class="list-group-item">Написан компонент checkbox multiple</li>
                 <li class="list-group-item">Написан компонент select multiple</li>
                 <li class="list-group-item">Тестирование работеспособности</li>
+                <li class="list-group-item">Исправлены функции select и select-multiple(логика вынесена за рамки шаблона)</li>
+                <li class="list-group-item">Исправлена функция select-multiple(данные теперь корректно передаются на обработку)</li>
             </ol>
         </div>
         

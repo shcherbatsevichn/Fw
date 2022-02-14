@@ -18,7 +18,7 @@ class InputCheckboxMultiple extends Base{
     public function executeComponent()
     {
         ob_start();
-        foreach($this->params["list"] as $key => $value){
+        foreach($this->params["list"] as $key => $value){  //рендерим чекбоксы
             $this->params['name'] .= "[$key]";
             $value['name'] = $this->params['name'];
             $this->app->includeComponent($this->config,$this->template->id, $value);
